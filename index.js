@@ -57,6 +57,8 @@ import react from "@vitejs/plugin-react";
 import path2 from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 var vite_config_default = defineConfig({
+  base: "/personal-portfolio/",
+  // <-- your repo name
   plugins: [
     react(),
     runtimeErrorOverlay(),
