@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Download, Mail } from "lucide-react";
-import profileImage from "@assets/1000000478_1756701710370.jpeg";
+import profileImage from "@assets/1000000478.jpeg";
 
 export default function Hero() {
   const handleContactClick = () => {
