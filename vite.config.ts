@@ -5,7 +5,6 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
   base: '/personal-portfolio/',
-  // base: '/personal-portfolio/', // <-- your repo name
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -27,8 +26,24 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/"),
+    outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
+    rollupOptions: {
+      input: path.resolve(import.meta.dirname, "client", "index.html"),
+      output: {
+        // Ensure consistent asset naming
+        assetFileNames: (assetInfo) => {
+          const info = (assetInfo.name ?? '').split('.');
+          const ext = info[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext)) {
+            return `assets/images/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+      }
+    }
   },
   server: {
     fs: {
